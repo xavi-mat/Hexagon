@@ -39,15 +39,19 @@ label main_loop:
     $ new_cell = _return
     $ select_cell(new_cell)
 
-    if cell.npc:
-        "[npc.name] quiere «[npc.wants.name]» y tiene «[npc.has.name]»."
-        if inventory.has_item(cell.npc.wants):
-            $ inventory.remove_item(cell.npc.wants)
-            $ inventory.add_item(cell.npc.has)
-            $ cell.npc.wants = None
-            $ cell.npc.has = None
-            "Has dado a [npc.name] lo que quería."
+    if npc:
+        $ npc.visit += 1
+        if npc.wants:
+            "[npc.name] quiere «[npc.wants.name]» y tiene «[npc.has.name]».\n{nw}"
+            if inventory.has_item(npc.wants):
+                extend "Has dado a [npc.name] lo que quería."
+                $ inventory.remove_item(npc.wants)
+                $ inventory.add_item(npc.has)
+                $ npc.wants = None
+                $ npc.has = None
+            else:
+                extend "No tienes lo que quiere."
         else:
-            "No tienes lo que quiere."
+            pass # Another visit
 
     jump main_loop

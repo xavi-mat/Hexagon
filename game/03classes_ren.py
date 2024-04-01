@@ -23,7 +23,7 @@ class Cell:
         self.x = x
         self.y = y
         self.row = y % 2
-        self.known = True
+        self.known = False
         self.npc = None
         self.item = None
         self.terrain = renpy.random.choice(["prado", "bosque", "colinas", "montes", "lago"])
@@ -142,6 +142,7 @@ class NPC:
             desc += f"Quiere: {self.wants.name}\n"
         if self.has:
             desc += f"Tiene: {self.has.name}\n"
+        desc += f"Visitas: {self.visit}\n"
         return desc
 
 class Item:
@@ -166,12 +167,6 @@ class Inventory:
 
 ################################################################################
 # Functions
-# def get_adjacents(x, y):
-#     cell = hexmap.get_cell(x, y)
-#     adj_pos = cell.adjacents
-#     adj_cells = [hexmap.get_cell(*pos) for pos in adj_pos]
-#     return adj_cells
-
 def select_cell(c):
     global cell, adjacents, npc
     c.reveal()
