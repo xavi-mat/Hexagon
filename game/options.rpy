@@ -44,7 +44,7 @@ define build.name = "Hexagon"
 
 ## Estas tres variables controlan, entre otras cosas, qué mezcladores se
 ## muestran al reproductor de forma predeterminada. Establecer uno de estos en
-## False ocultará el mezclador apropiado. 
+## False ocultará el mezclador apropiado.
 
 define config.has_sound = True
 define config.has_music = True
@@ -111,8 +111,8 @@ define config.window = "auto"
 
 ## Transiciones usadas para mostrar o esconder la ventana de diálogo
 
-define config.window_show_transition = Dissolve(.2)
-define config.window_hide_transition = Dissolve(.2)
+define config.window_show_transition = None #Dissolve(.2)
+define config.window_hide_transition = None #Dissolve(.2)
 
 
 ## Preferencias por defecto ####################################################
