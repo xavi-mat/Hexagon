@@ -1,3 +1,4 @@
+MANY_NAMES = []
 ITEM_NAMES = []
 renpy = None
 config = None
@@ -73,6 +74,7 @@ class Cell:
         desc = ""
         desc += f"Terreno: {self.terrain}\n"
         if self.npc:
+            desc += "{b}" + self.npc.name + "{/b}\n"
             desc += self.npc.desc
         if self.item:
             desc += self.item.desc
@@ -136,7 +138,6 @@ class NPC:
     @property
     def desc(self):
         desc = ""
-        desc += "{b}" +  f"{self.name}" + "{/b}\n"
         if self.wants:
             desc += f"Quiere: {self.wants.name}\n"
         if self.has:
@@ -181,10 +182,11 @@ def select_cell(c):
         c.reveal()
 
 def create_npcs(items):
+    renpy.random.shuffle(MANY_NAMES)
     num = (len(items) - 1) * 3
     npcs = []
     for i in range(num):
-        name = "NPC" + str(i)
+        name = MANY_NAMES[i]
         image = "npc_" + str(renpy.random.randint(1, 12))
         npc = NPC(name, image)
         npcs.append(npc)

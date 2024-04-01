@@ -1,6 +1,6 @@
 screen main_map():
 
-    default npc = None
+    default innpc = None
 
     for c in hexmap.cells:
         fixed:
@@ -10,16 +10,10 @@ screen main_map():
             if c.event:
                 imagebutton idle c.event:
                     align (0.5, 0.5)
-                    action SetScreenVariable("npc", c.npc)
+                    action SetScreenVariable("innpc", c.npc)
 
             if cell == c:
                 add "hexagon_selected"
-            # text "[c.x].[c.y]" align (0.5, 0.5) size 24:
-            #     if c in adjacents:
-            #         color "#00FF00"
-
-            # sensitive c in adjacents
-            # action Function(select_cell, c)
 
     frame:
         xpos 1485
@@ -27,14 +21,11 @@ screen main_map():
         has vbox
         label "Cell"
         text "[cell.desc]" size 24
-        # if cell.npc:
-        #     textbutton "Hablar con [cell.npc.name]" action NullAction()
 
-
-        if npc:
+        if innpc:
             add Solid("#0000CC", ysize = 5)
-            label "NPC"
-            text "[npc.desc]" size 24
+            label "[innpc.name]"
+            text "[innpc.desc]" size 24
 
         if inventory.items:
             add Solid("#0000CC", ysize = 5)
