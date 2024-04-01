@@ -1,0 +1,23 @@
+# Ignore everything, except folders
+*
+!*/
+# Dont ignore:
+# rpy, rpym, and py files, in game/
+!game/**/*.rpy
+!game/**/*.rpym
+!game/**/*.py
+# assets in game/xx (.png, .jpg, .ogg, .mp3, .ttf, .otf)
+# (for now, ignore gui images)
+!game/images/**/*.png
+!game/images/**/*.jpg
+!game/audio/**/*.ogg
+!game/audio/**/*.mp3
+!game/gui/**/*.ttf
+!game/gui/**/*.otf
+# And CREDITS.txt
+!CREDITS.txt
+# And some things in materials/
+!materials/**/*.md
+!materials/**/*.py
+# And, of course, this file
+!/.gitignore
