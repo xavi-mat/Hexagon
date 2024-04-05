@@ -1,3 +1,4 @@
+inventory = None
 MANY_NAMES = []
 ITEM_NAMES = []
 renpy = None
@@ -128,18 +129,26 @@ class HexagonGrid:
 
 
 class NPC:
-    def __init__(self, name, image):
+    def __init__(self, ide, name, image):
+        self.ide = str(ide)
         self.name = name
         self.image = image
         self.visit = 0
         self.wants = None
         self.has = None
+        self.label = "visit_npc_" + self.ide
+        self.dismiss = True
 
     @property
     def desc(self):
         desc = ""
         if self.wants:
-            desc += f"Quiere: {self.wants.name}\n"
+            wanted = self.wants.name
+            if inventory.has_item(self.wants):
+                wanted = "{color=#44ff44}" + wanted + "{/color}"
+            else:
+                wanted = "{color=#ff4444}" + wanted + "{/color}"
+            desc += f"Quiere: {wanted}\n"
         if self.has:
             desc += f"Tiene: {self.has.name}\n"
         desc += f"Visitas: {self.visit}\n"
@@ -183,7 +192,7 @@ def create_npcs(items):
     for i in range(num):
         name = MANY_NAMES[i]
         image = "npc_" + str(renpy.random.randint(1, 12))
-        npc = NPC(name, image)
+        npc = NPC(i, name, image)
         npcs.append(npc)
     renpy.random.shuffle(npcs)
     for i in range(num):

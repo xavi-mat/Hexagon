@@ -15,7 +15,7 @@ label start:
     $ inventory.add_item(renpy.random.choice(items))
     $ inventory.add_item(renpy.random.choice(items))
     $ inventory.add_item(renpy.random.choice(items))
-    $ hexmap = HexagonGrid(10,25)
+    $ hexmap = HexagonGrid(10, 24)
     $ npcs = create_npcs(items)
     $ place_npcs_on_map(npcs)
 
@@ -41,17 +41,27 @@ label main_loop:
 
     if npc:
         $ npc.visit += 1
+
+        if renpy.has_label(npc.label):
+            call expression npc.label
+
         if npc.wants:
-            "[npc.name] quiere «[npc.wants.name]» y tiene «[npc.has.name]».\n{nw}"
             if inventory.has_item(npc.wants):
-                extend "Has dado a [npc.name] lo que quería."
-                $ inventory.remove_item(npc.wants)
-                $ inventory.add_item(npc.has)
-                $ npc.wants = None
-                $ npc.has = None
-            else:
-                extend "No tienes lo que quiere."
-        else:
-            pass # Another visit
+                menu:
+                    "Darle a [npc.name] «[npc.wants.name]» a cambio de «[npc.has.name]».":
+                        # "Has dado a [npc.name] lo que quería."
+                        $ inventory.remove_item(npc.wants)
+                        $ inventory.add_item(npc.has)
+                        $ npc.wants = None
+                        $ npc.has = None
+                        if npc.dismiss:
+                            $ cell.npc = None  # Delete npc from map
+                    "No darle nada.":
+                        pass
+            # else:
+            #     "[npc.name] quiere «[npc.wants.name]» y tiene «[npc.has.name]».\n{nw}"
+            #     extend "No tienes lo que quiere."
+        # else:
+        #     pass # Another visit
 
     jump main_loop
