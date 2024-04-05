@@ -17,6 +17,7 @@ init python:
 # Variables
 log_list = []
 
+
 ################################################################################
 # Classes
 class Cell:
@@ -24,10 +25,12 @@ class Cell:
         self.x = x
         self.y = y
         self.row = y % 2
-        self.known = False
+        self.known = False or True
         self.npc = None
         self.item = None
-        self.terrain = renpy.random.choice(["prado", "bosque", "colinas", "montes", "lago"])
+        self.terrain = renpy.random.choice(
+            ["prado", "bosque", "colinas", "montes", "lago"]
+        )
         # Position calculations for hexagon grid
         self.pos = (x * 146 + 73 * self.row, y * 42)
 
@@ -153,10 +156,12 @@ class NPC:
         desc += f"Visitas: {self.visit}\n"
         return desc
 
+
 class Item:
     def __init__(self, name, image):
         self.name = name
         self.image = image
+
 
 class Inventory:
     def __init__(self):
@@ -172,7 +177,6 @@ class Inventory:
         return item in self.items
 
 
-
 ################################################################################
 # Functions
 def select_cell(c):
@@ -183,6 +187,7 @@ def select_cell(c):
     adjacents = hexmap.get_adjacents(cell)
     for c in adjacents:
         c.reveal()
+
 
 def create_npcs(items):
     renpy.random.shuffle(MANY_NAMES)
@@ -197,8 +202,9 @@ def create_npcs(items):
     for i in range(num):
         item_index = i // 3
         npcs[i].wants = items[item_index]
-        npcs[i].has = items[item_index+1]
+        npcs[i].has = items[item_index + 1]
     return npcs
+
 
 def create_items(num):
     renpy.random.shuffle(ITEM_NAMES)
@@ -211,13 +217,17 @@ def create_items(num):
     renpy.random.shuffle(items)
     return items
 
+
 def get_available_cells(num):
     """
     Return a list of cells that are not water and not the starting cell.
     So the charas can be placed on them.
     """
-    available = [c for c in hexmap.cells if c.terrain != "lago" and not (c.x==0 and c.y==12)]
+    available = [
+        c for c in hexmap.cells if c.terrain != "lago" and not (c.x == 0 and c.y == 12)
+    ]
     return renpy.random.sample(available, num)
+
 
 def place_npcs_on_map(npcs):
     cells = get_available_cells(len(npcs))

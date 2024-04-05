@@ -7,6 +7,8 @@ screen main_map():
             xysize(100, 86)
             pos c.pos
             add c.hexagon
+            if c.event and c.npc and inventory.has_item(c.npc.wants):
+                add "wanted_marker" align (0.5, 0.5)
             if c.event:
                 imagebutton idle c.event:
                     align (0.5, 0.5)
