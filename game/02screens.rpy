@@ -42,7 +42,9 @@ screen main_map():
 
 screen over_map():
 
-    for c in adjacents:
+    for i, c in enumerate(adjacents):
+        $ letter = "wedsaq"[i]
+
         if c and not c.terrain == "lago":
             fixed:
                 xysize(100, 86)
@@ -50,3 +52,7 @@ screen over_map():
                 imagebutton idle Text("🟠", size=22) hover Text("🟡", size=22):
                     align (0.5, 1.0)
                     action Return(c)
+
+            key letter action Return(c)
+        else:
+            key letter action None

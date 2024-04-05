@@ -101,7 +101,7 @@ class HexagonGrid:
     def get_adjacents(self, cell):
         adj_coords = cell.adjacents
         adj_cells = [self.get_cell(*coords) for coords in adj_coords]
-        adj_cells = [c for c in adj_cells if c]
+        # adj_cells = [c for c in adj_cells if c]
         return adj_cells
 
     def get_distance(self, x1, y1, x2, y2):
@@ -186,7 +186,8 @@ def select_cell(c):
     npc = cell.npc
     adjacents = hexmap.get_adjacents(cell)
     for c in adjacents:
-        c.reveal()
+        if c:
+            c.reveal()
 
 
 def create_npcs(items):
