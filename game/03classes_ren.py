@@ -28,8 +28,7 @@ class Cell:
         self.npc = None
         self.item = None
         self.terrain = renpy.random.choice(["prado", "bosque", "colinas", "montes", "lago"])
-        # self.hexagon = "hex_" + self.terrain
-
+        # Position calculations for hexagon grid
         self.pos = (x * 146 + 73 * self.row, y * 42)
 
     @property

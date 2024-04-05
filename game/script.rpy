@@ -4,7 +4,8 @@ define e = Character("Eileen")
 
 label start:
 
-    $ _confirm_quit = False
+    if config.developer:
+        $ _confirm_quit = False
 
     scene expression Solid("#000000")
 
@@ -19,13 +20,13 @@ label start:
     $ npcs = create_npcs(items)
     $ place_npcs_on_map(npcs)
 
+    # Starting point
     $ cell = hexmap.get_cell(0, 12)
     $ cell.terrain = renpy.random.choice(["prado", "bosque", "colinas", "montes"])
-    $ adjacents = hexmap.get_adjacents(cell)
+    # $ adjacents = hexmap.get_adjacents(cell)
     $ select_cell(cell)
 
     show screen main_map
-
 
     jump main_loop
 
@@ -65,3 +66,4 @@ label main_loop:
         #     pass # Another visit
 
     jump main_loop
+    
