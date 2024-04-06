@@ -14,6 +14,7 @@
 !game/audio/**/*.mp3
 !game/gui/**/*.ttf
 !game/gui/**/*.otf
+!game/gui/**/*.png
 # And CREDITS.txt
 !CREDITS.txt
 # And some things in materials/
