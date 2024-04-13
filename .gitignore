@@ -6,8 +6,7 @@
 !game/**/*.rpy
 !game/**/*.rpym
 !game/**/*.py
-# assets in game/xx (.png, .jpg, .ogg, .mp3, .ttf, .otf)
-# (for now, ignore gui images)
+# assets in game/ (.png, .jpg, .ogg, .mp3, .ttf, .otf)
 !game/images/**/*.png
 !game/images/**/*.jpg
 !game/audio/**/*.ogg
