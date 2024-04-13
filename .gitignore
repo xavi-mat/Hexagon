@@ -7,13 +7,12 @@
 !game/**/*.rpym
 !game/**/*.py
 # assets in game/ (.png, .jpg, .ogg, .mp3, .ttf, .otf)
-!game/images/**/*.png
-!game/images/**/*.jpg
-!game/audio/**/*.ogg
-!game/audio/**/*.mp3
-!game/gui/**/*.ttf
-!game/gui/**/*.otf
-!game/gui/**/*.png
+!game/**/*.png
+!game/**/*.jpg
+!game/**/*.ogg
+!game/**/*.mp3
+!game/**/*.ttf
+!game/**/*.otf
 # And CREDITS.txt
 !CREDITS.txt
 # And some things in materials/
