@@ -7,7 +7,7 @@ label start:
     if config.developer:
         $ _confirm_quit = False
 
-    scene expression Solid("#000000")
+    scene black
 
     # Initialize
     $ items = create_items(21)
@@ -66,4 +66,3 @@ label main_loop:
         #     pass # Another visit
 
     jump main_loop
-    
