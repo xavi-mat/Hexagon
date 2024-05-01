@@ -145,12 +145,12 @@ class NPC:
     def desc(self):
         desc = ""
         if self.wants:
-            wanted = self.wants.name
-            if inventory.has_item(self.wants):
-                wanted = "{color=#44ff44}" + wanted + "{/color}"
-            else:
-                wanted = "{color=#ff4444}" + wanted + "{/color}"
-            desc += f"Quiere: {wanted}\n"
+            # wanted = self.wants.name
+            # if inventory.has_item(self.wants):
+            #     wanted = "{color=#44ff44}" + wanted + "{/color}"
+            # else:
+            #     wanted = "{color=#ff4444}" + wanted + "{/color}"
+            desc += f"Quiere: {self.wants.name}\n"
         if self.has:
             desc += f"Tiene: {self.has.name}\n"
         desc += f"Visitas: {self.visit}\n"
@@ -159,8 +159,18 @@ class NPC:
 
 class Item:
     def __init__(self, name, image):
-        self.name = name
+        self._name = name
         self.image = image
+
+    @property
+    def name(self):
+        if inventory:
+            if inventory.has_item(self):
+                return "{color=#44ff44}" + self._name + "{/color}"
+            else:
+                return "{color=#ff4444}" + self._name + "{/color}"
+        return self._name
+
 
 
 class Inventory:
