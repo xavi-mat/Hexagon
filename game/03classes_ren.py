@@ -77,7 +77,7 @@ class Cell:
         desc = ""
         desc += f"Terreno: {self.terrain}\n"
         if self.npc:
-            desc += "{b}" + self.npc.name + "{/b}\n"
+            desc += self.npc.name + "\n"
             desc += self.npc.desc
         if self.item:
             desc += self.item.desc
@@ -101,7 +101,6 @@ class HexagonGrid:
     def get_adjacents(self, cell):
         adj_coords = cell.adjacents
         adj_cells = [self.get_cell(*coords) for coords in adj_coords]
-        # adj_cells = [c for c in adj_cells if c]
         return adj_cells
 
     def get_distance(self, x1, y1, x2, y2):
@@ -133,7 +132,8 @@ class HexagonGrid:
 class NPC:
     def __init__(self, ide, name, image):
         self.ide = str(ide)
-        self.name = name
+        self.name0 = name
+        self.name = "{b}" + name + "{/b}"
         self.image = image
         self.visit = 0
         self.wants = None
@@ -145,11 +145,6 @@ class NPC:
     def desc(self):
         desc = ""
         if self.wants:
-            # wanted = self.wants.name
-            # if inventory.has_item(self.wants):
-            #     wanted = "{color=#44ff44}" + wanted + "{/color}"
-            # else:
-            #     wanted = "{color=#ff4444}" + wanted + "{/color}"
             desc += f"Quiere: {self.wants.name}\n"
         if self.has:
             desc += f"Tiene: {self.has.name}\n"
@@ -170,7 +165,6 @@ class Item:
             else:
                 return "{color=#ff4444}" + self._name + "{/color}"
         return self._name
-
 
 
 class Inventory:

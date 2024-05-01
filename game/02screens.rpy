@@ -21,12 +21,12 @@ screen main_map():
         xpos 1485
         xsize 435 yfill True
         has vbox
-        label "Cell"
+        label "Hexágono"
         text "[cell.desc]" size 24
 
         if innpc:
             add Solid("#0000CC", ysize = 5)
-            label "[innpc.name]"
+            label "[innpc.name0]"
             text "[innpc.desc]" size 24
 
         if inventory.items:

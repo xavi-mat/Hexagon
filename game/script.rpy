@@ -23,7 +23,6 @@ label start:
     # Starting point
     $ cell = hexmap.get_cell(0, 12)
     $ cell.terrain = renpy.random.choice(["prado", "bosque", "colinas", "montes"])
-    # $ adjacents = hexmap.get_adjacents(cell)
     $ select_cell(cell)
 
     show screen main_map
